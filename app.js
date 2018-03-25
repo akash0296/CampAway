@@ -1,21 +1,11 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var Campground = require("./models/campground");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/camp_app");
-
-//SCHEMA SETUP.
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-//CREATING A MODEL BASED ON THE SCHEMA CREATED ABOVE.
-var Campground = mongoose.model("Campground", campgroundSchema);
-
 
 // Campground.create({
 //     name: "Granite Hill",
