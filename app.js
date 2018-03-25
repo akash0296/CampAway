@@ -11,6 +11,7 @@ mongoose.connect("mongodb://localhost/camp_app");
 
 
 seedDB();
+app.use(express.static(__dirname  + "/public"));
 
 
 app.get("/", function(req, res){
