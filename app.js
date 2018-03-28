@@ -31,6 +31,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//PASSING req.user TO ALL THE ROUTES/NAVBAR
+app.use(function(req, res, next){
+    res.locals.currentUser = req.currentUser;
+    next();
+});
+
+//ROUTES
+
 app.get("/", function(req, res){
     res.render("landing");
 });
@@ -43,7 +51,7 @@ app.get("/campgrounds", function(req, res){
         if(error){
             console.log(error);
         }else{
-            res.render("campgrounds/index", {campgrounds:allCamps});
+            res.render("campgrounds/index", {campgrounds:allCamps, currentUser: req.user});
         }
     })
    
