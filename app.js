@@ -20,7 +20,7 @@ var commentRoutes = require("./routes/comments"),
     indexRoutes = require("./routes/index");
 
 
-seedDB();
+// seedDB();  //seed the database
 app.use(express.static(__dirname  + "/public"));
 
 
