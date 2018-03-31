@@ -28,14 +28,19 @@ router.post("/", isLoggedIn, function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
-    var newCampground = {name: name, image: image, description: description};
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
+    var newCampground = {name: name, image: image, description: description, author: author};
     //CREATING NEW CAMPGROUND.
     Campground.create(newCampground, function(error, newlyCreated){
         if(error){
             console.log(error);
         }else{
-            res.redirect("/campgrounds");
             console.log(newlyCreated);
+            res.redirect("/campgrounds");
+            
         }
     });
 });
@@ -53,6 +58,7 @@ router.get("/:id", function(req, res){
         })
 });
 
+//MIDDLEWARE
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
