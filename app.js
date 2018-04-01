@@ -1,13 +1,15 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var Campground = require("./models/campground");
-var passport = require("passport");
-var LocalStrategy = require("passport-local");
-var passportLocalMongoose = require("passport-local-mongoose");
-var Comment = require("./models/comment");
-var User = require("./models/user");
-var seedDB = require("./seeds")
+var express                     =   require("express");
+var app                         =   express();
+var bodyParser                  =   require("body-parser");
+var Campground                  =   require("./models/campground");
+var passport                    =   require("passport");
+var LocalStrategy               =   require("passport-local");
+var passportLocalMongoose       =   require("passport-local-mongoose");
+var methodOverride              =   require("method-override");
+var Comment                     =   require("./models/comment");
+var User                        =   require("./models/user");
+var seedDB                      =   require("./seeds");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 var mongoose = require("mongoose");
@@ -22,6 +24,7 @@ var commentRoutes = require("./routes/comments"),
 
 // seedDB();  //seed the database
 app.use(express.static(__dirname  + "/public"));
+app.use(methodOverride("_method"));
 
 
 //PASSPORT CONFIGURATION
