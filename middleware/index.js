@@ -2,6 +2,7 @@
 
 var Campground = require("../models/campground");
 var Comment = require("../models/comment");
+
 var middlewareObj = {};
 
 middlewareObj.checkCommentUser = function(req, res, next){
@@ -15,11 +16,13 @@ middlewareObj.checkCommentUser = function(req, res, next){
                 if(foundComment.author.id.equals(req.user._id)){
                     next();
                 }else{
+                    req.flash("error", "you're not authorized to do that");
                     res.redirect("back");
                 }
             }
         });
     }else{
+        req.flash("error", "Please login first");
         res.redirect("back");
     }
 }
@@ -28,6 +31,7 @@ middlewareObj.checkCampgroundUser = function(req, res, next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id, function(err, foundCampground){
             if(err){
+                req.flash("error", "Campground not found");
                 console.log(err);
                 res.redirect("back")
             }else{
@@ -35,11 +39,13 @@ middlewareObj.checkCampgroundUser = function(req, res, next){
                 if(foundCampground.author.id.equals(req.user._id)){
                     next();
                 }else{
+                    req.flash("error", "you're not authorized to do that");
                     res.redirect("back");
                 }
             }
         });
     }else{
+        req.flash("error","Please login first");
         res.redirect("back");
     }
 }
