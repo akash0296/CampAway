@@ -14,7 +14,8 @@ var seedDB                      =   require("./seeds");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/camp_app");
+// mongoose.connect("mongodb://localhost/camp_app");
+mongoose.connect("mongodb://poseidon:poseidon@ds237379.mlab.com:37379/campaway");
 
 //REQUIRING ROUTES
 var commentRoutes = require("./routes/comments"),
