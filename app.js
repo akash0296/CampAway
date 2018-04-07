@@ -14,6 +14,7 @@ var seedDB                      =   require("./seeds");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 var mongoose = require("mongoose");
+// mongoose.connect("mongodb://odin:Akash@12345@ds237409.mlab.com:37409/camp_away");
 mongoose.connect("mongodb://localhost/camp_app");
 
 
