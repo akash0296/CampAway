@@ -54,9 +54,6 @@ function seedDB(){
             });     
         });
     }); 
-    
-    
-    
 }
 
 
